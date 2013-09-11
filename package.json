@@ -1,26 +1,33 @@
 {
-	"name": "uXHR",
-	"version": "1.0.0",
-	"description": "The teeny tiny XHR library",
-	"author": "Boris Cherny <boris@performancejs.com>",
-	"contributors": [
-		{
-			"name": "Boris Cherny",
-			"email": "boris@performancejs.com"
-		}
-	],
-	"devDependencies": {
-		"grunt": "~0.4.1",
-		"grunt-contrib-uglify": "~0.2.4",
-		"grunt-contrib": "~0.7.0",
-		"grunt-contrib-concat": "~0.3.0"
-	},
-	"license": "MIT",
-	"readmeFilename": "README.md",
-	"dependencies": {},
-	"repository": {
-		"type": "git",
-		"url": "https://github.com/eighttrackmind/draggable.git"
-	},
-	"keywords": ["xhr", "ajax", "request", "get", "post", "put"]
+  "name": "uxhr",
+  "version": "1.0.0",
+  "description": "The teeny tiny cross-browser XHR library",
+  "author": "Boris Cherny <boris@performancejs.com>",
+  "contributors": [
+    {
+      "name": "Boris Cherny",
+      "email": "boris@performancejs.com"
+    }
+  ],
+  "devDependencies": {
+    "grunt": "~0.4.1",
+    "grunt-contrib-uglify": "~0.2.4",
+    "grunt-amd-wrap": "~1.0.1",
+    "grunt-autowrap": "~0.3.0"
+  },
+  "license": "MIT",
+  "readmeFilename": "README.md",
+  "dependencies": {},
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/eighttrackmind/uxhr.git"
+  },
+  "keywords": [
+    "xhr",
+    "ajax",
+    "request",
+    "get",
+    "post",
+    "put"
+  ]
 }
