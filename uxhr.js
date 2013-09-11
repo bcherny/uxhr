@@ -1,8 +1,12 @@
 function uxhr (url, data, options) {
 
-	var callback = options.complete || function(){},
-		headers = options.headers || {},
-		method = options.method || 'GET',
+	var _data = data || '',
+		_options = options || {},
+		complete = _options.complete || function(){},
+		success = _options.success || function(){},
+		error = _options.error || function(){},
+		headers = _options.headers || {},
+		method = _options.method || 'GET',
 		req = (function() {
 			return XMLHttpRequest ? new XMLHttpRequest() : (ActiveXObject ? new ActiveXObject('Microsoft.XMLHTTP') : 0);
 		})();
@@ -12,23 +16,36 @@ function uxhr (url, data, options) {
 	}
 
 	// serialize data?
-	if (data && typeof data !== 'string') {
+	if (typeof _data !== 'string') {
 		var serialized = [];
-		for (var d in data) {
-			serialized.push(d + '=' + data[d]);
+		for (var d in _data) {
+			serialized.push(d + '=' + _data[d]);
 		}
-		data = serialized.join('&');
+		_data = serialized.join('&');
 	}
+
+	// set timeout
+	req.ontimeout = +_options.timeout || 0;
 
 	// listen for XHR events
 	req.onreadystatechange = function (e) {
 		if (req.readyState === 4) {
-			callback(req.responseText);
+
+			var response = req.responseText,
+				status = req.status;
+
+			if (status < 400) {
+				success(response);
+			} else {
+				error(response, status);
+			}
+
+			complete(response, status);
 		}
 	};
 
 	// 1. open connection
-	req.open(method, (method==='GET' ? url+'?'+data : url));
+	req.open(method, (method==='GET' ? url+'?'+_data : url));
 
 	// 2. set headers
 	for (var header in headers) {
@@ -36,5 +53,5 @@ function uxhr (url, data, options) {
 	}
 
 	// 3. send it
-	req.send(method==='POST'?data:null);
+	req.send(method!=='GET'?_data:null);
 }

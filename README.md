@@ -36,6 +36,9 @@ uxhr('endpoint.php', data, options);
 |---------------|-----------|---------------|---------------------------------------|
 | method		| String	| `GET`			| `GET`, `POST`, `PUT`, `DELETE`, etc.	|
 | headers		| Object	| {}			| Custom headers for this request		|
+| timeout		| Number	| 0				| Timeout (in ms) before aborting the request |
 | complete		| Function	| function(){}	| A callback fired when the request is completed |
+| success		| Function	| function(){}	| A callback fired when the request is completed successfully (eg. with HTTP status code < 400) |
+| error			| Function	| function(){}	| A callback fired when the request returns an error (eg. HTTP status code >= 400) |
 
 ##Browser support
