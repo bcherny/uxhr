@@ -1,0 +1,26 @@
+{
+  "name": "uxhr",
+  "version": "1.0.1",
+  "homepage": "https://github.com/eighttrackmind/uxhr",
+  "authors": [
+    "Boris Cherny <boris@performancejs.com>"
+  ],
+  "description": "The teeny tiny cross-browser XHR library - just 488 bytes gzipped!",
+  "main": "src/uxhr.js",
+  "keywords": [
+    "xhr",
+    "ajax",
+    "request",
+    "get",
+    "pos",
+    "put",
+    "XMLHttpRequest",
+    "XMLHTTP"
+  ],
+  "license": "MIT",
+  "ignore": [
+    "**/.*",
+    "node_modules",
+    "bower_components"
+  ]
+}

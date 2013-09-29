@@ -26,6 +26,8 @@
     "request",
     "get",
     "post",
-    "put"
+    "put",
+    "XMLHttpRequest",
+    "XMLHTTP"
   ]
 }
