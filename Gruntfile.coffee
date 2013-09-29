@@ -17,14 +17,6 @@ module.exports = (grunt) ->
 						'src/uxhr.js'
 					]
 
-		autowrap:
-			standard:
-				options:
-					wrapType: 'amd'
-					ext: 'js'
-				files: 'dist/uxhr.amd.min.js': ['dist/uxhr.min.js']
-
 	grunt.loadNpmTasks 'grunt-contrib-uglify'
-	grunt.loadNpmTasks 'grunt-autowrap'
 
-	grunt.registerTask 'default', ['uglify', 'autowrap']
+	grunt.registerTask 'default', ['uglify']

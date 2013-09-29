@@ -1,0 +1,44 @@
+<!doctype html>
+<html>
+<head>
+	<meta charset="utf-8" />
+	<title>µXHR demo | uxhr.js</title>
+</head>
+<body>
+
+	<script src="//requirejs.org/docs/release/2.1.8/minified/require.js"></script>
+	<script>
+
+	require(['../src/uxhr'], function(uxhr) {
+
+		uxhr('endpoint.html', '', {
+			complete: complete,
+			success: success,
+			error: error
+		});
+
+	});
+
+	function complete (response, status) {
+		log('"'+response+'"', status);
+	}
+
+	function success (response) {
+		log('"'+response+'"');
+	}
+
+	function error (response, status) {
+		log('"'+response+'"', status);
+	}
+
+	function log () {
+		document.body.innerHTML +=
+			arguments.callee.caller.name + ': ' + // the calling function's name
+			[].slice.call(arguments).join(' ') +  // response, status?
+			'<br />';
+	}
+
+	</script>
+
+</body>
+</html>

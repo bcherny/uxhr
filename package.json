@@ -1,7 +1,7 @@
 {
   "name": "uxhr",
-  "version": "1.0.0",
-  "description": "The teeny tiny cross-browser XHR library - just 426 bytes gzipped!",
+  "version": "1.0.1",
+  "description": "The teeny tiny cross-browser XHR library - just 488 bytes gzipped!",
   "author": "Boris Cherny <boris@performancejs.com>",
   "contributors": [
     {
@@ -11,9 +11,7 @@
   ],
   "devDependencies": {
     "grunt": "~0.4.1",
-    "grunt-contrib-uglify": "~0.2.4",
-    "grunt-amd-wrap": "~1.0.1",
-    "grunt-autowrap": "~0.3.0"
+    "grunt-contrib-uglify": "~0.2.4"
   },
   "license": "MIT",
   "readmeFilename": "README.md",
