@@ -24,6 +24,16 @@ describe 'uxhr', ->
 
 			expect(xhr.headers).to.deep.equal(headers)
 
+	it 'should set the timeout to that passed in options.timeout', ->
+
+		timeout = 42
+
+		sinon.useFakeXMLHttpRequest().onCreate = (xhr) ->
+			uxhr '#', {},
+				timeout: timeout
+
+			expect(xhr.timeout).to.equal(timeout)
+
 	describe 'methods', ->
 
 		it 'should default the method to GET', ->

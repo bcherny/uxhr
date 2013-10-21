@@ -26,6 +26,16 @@ describe('uxhr', function() {
       return expect(xhr.headers).to.deep.equal(headers);
     };
   });
+  it('should set the timeout to that passed in options.timeout', function() {
+    var timeout;
+    timeout = 42;
+    return sinon.useFakeXMLHttpRequest().onCreate = function(xhr) {
+      uxhr('#', {}, {
+        timeout: timeout
+      });
+      return expect(xhr.timeout).to.equal(timeout);
+    };
+  });
   describe('methods', function() {
     it('should default the method to GET', function() {
       return sinon.useFakeXMLHttpRequest().onCreate = function(xhr) {
