@@ -16,6 +16,7 @@
     "chai": "~1.8.1",
     "mocha": "~1.13.0"
   },
+  "main": "src/uxhr.js",
   "license": "MIT",
   "readmeFilename": "README.md",
   "dependencies": {},
