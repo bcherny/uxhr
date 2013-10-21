@@ -6,23 +6,37 @@ expect = chai.expect;
 mocha.setup('bdd');
 
 describe('uxhr', function() {
-  it('should default the XMLHttpRequest method to GET', function() {
-    var xhr;
-    xhr = sinon.useFakeXMLHttpRequest();
-    return xhr.onCreate = function(xhr) {
-      uxhr('#', {});
-      return expect(xhr.method).to.equal('GET');
+  it('should set headers to those passed in options.headers', function() {
+    var headers;
+    headers = {
+      'Content-Type': 'application/json'
+    };
+    return sinon.useFakeXMLHttpRequest().onCreate = function(xhr) {
+      uxhr('#', {}, {
+        headers: headers
+      });
+      return expect(xhr.headers).to.deep.equal(headers);
     };
   });
-  it('should set the XMLHttpRequest method to options.method', function() {
-    var xhr;
-    xhr = sinon.useFakeXMLHttpRequest();
-    return xhr.onCreate = function(xhr) {
-      uxhr('#', {}, {
-        method: 'POST'
-      });
-      return expect(xhr.method).to.equal('POST');
-    };
+  describe('methods', function() {
+    it('should default the method to GET', function() {
+      var xhr;
+      xhr = sinon.useFakeXMLHttpRequest();
+      return xhr.onCreate = function(xhr) {
+        uxhr('#', {});
+        return expect(xhr.method).to.equal('GET');
+      };
+    });
+    return it('should set the method to options.method', function() {
+      var xhr;
+      xhr = sinon.useFakeXMLHttpRequest();
+      return xhr.onCreate = function(xhr) {
+        uxhr('#', {}, {
+          method: 'POST'
+        });
+        return expect(xhr.method).to.equal('POST');
+      };
+    });
   });
   return describe('callbacks', function() {
     it('should call options.complete()', function() {

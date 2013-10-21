@@ -5,22 +5,35 @@ mocha.setup 'bdd'
 
 describe 'uxhr', ->
 
-	it 'should default the XMLHttpRequest method to GET', ->
+	it 'should set headers to those passed in options.headers', ->
 
-		xhr = sinon.useFakeXMLHttpRequest()
+		headers =
+			'Content-Type': 'application/json'
 
-		xhr.onCreate = (xhr) ->
-			uxhr '#', {}
-			expect(xhr.method).to.equal('GET')
-
-	it 'should set the XMLHttpRequest method to options.method', ->
-
-		xhr = sinon.useFakeXMLHttpRequest()
-
-		xhr.onCreate = (xhr) ->
+		sinon.useFakeXMLHttpRequest().onCreate = (xhr) ->
 			uxhr '#', {},
-				method: 'POST'
-			expect(xhr.method).to.equal('POST')
+				headers: headers
+
+			expect(xhr.headers).to.deep.equal(headers)
+
+	describe 'methods', ->
+
+		it 'should default the method to GET', ->
+
+			xhr = sinon.useFakeXMLHttpRequest()
+
+			xhr.onCreate = (xhr) ->
+				uxhr '#', {}
+				expect(xhr.method).to.equal('GET')
+
+		it 'should set the method to options.method', ->
+
+			xhr = sinon.useFakeXMLHttpRequest()
+
+			xhr.onCreate = (xhr) ->
+				uxhr '#', {},
+					method: 'POST'
+				expect(xhr.method).to.equal('POST')
 
 	describe 'callbacks', ->
 
