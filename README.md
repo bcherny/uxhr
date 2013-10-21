@@ -32,7 +32,7 @@ uxhr('endpoint.html', 'war=peace&freedom=slavery&ignorance=strength', {
 | Option		| Type		| Default		| Notes									|
 |---------------|-----------|---------------|---------------------------------------|
 | method		| String	| `GET`			| `GET`, `POST`, `PUT`, `DELETE`, etc.	|
-| headers		| Object	| `{}`			| Custom headers for this request		|
+| headers		| Object	| `{}`			| Custom headers for this request, see [wikipedia.org/wiki/List_of_HTTP_header_fields#Requests](http://en.wikipedia.org/wiki/List_of_HTTP_header_fields#Requests) |
 | timeout		| Number	| `0`			| Timeout (in ms) before aborting the request |
 | complete		| Function	| `function(){}`| Callback fired when the request is completed |
 | success		| Function	| `function(){}`| Callback fired when the request is completed successfully (eg. with HTTP status code < 400) |
