@@ -10,13 +10,14 @@
 
 	return function (url, data, options) {
 
-		var _data = data || '',
-			_options = options || {},
-			complete = _options.complete || function(){},
-			success = _options.success || function(){},
-			error = _options.error || function(){},
-			headers = _options.headers || {},
-			method = _options.method || 'GET',
+		data = data || '';
+		options = options || {};
+
+		var complete = options.complete || function(){},
+			success = options.success || function(){},
+			error = options.error || function(){},
+			headers = options.headers || {},
+			method = options.method || 'GET',
 			req = (function() {
 				return XMLHttpRequest ? new XMLHttpRequest() : (ActiveXObject ? new ActiveXObject('Microsoft.XMLHTTP') : 0);
 			})();
@@ -26,19 +27,19 @@
 		}
 
 		// serialize data?
-		if (typeof _data !== 'string') {
+		if (typeof data !== 'string') {
 			var serialized = [];
-			for (var d in _data) {
-				serialized.push(d + '=' + _data[d]);
+			for (var datum in data) {
+				serialized.push(datum + '=' + data[datum]);
 			}
-			_data = serialized.join('&');
+			data = serialized.join('&');
 		}
 
 		// set timeout
-		req.ontimeout = +_options.timeout || 0;
+		req.ontimeout = +options.timeout || 0;
 
 		// listen for XHR events
-		req.onreadystatechange = function (e) {
+		req.onreadystatechange = function () {
 			if (req.readyState === 4) {
 
 				var response = req.responseText,
@@ -55,7 +56,7 @@
 		};
 
 		// 1. open connection
-		req.open(method, (method==='GET' ? url+'?'+_data : url));
+		req.open(method, (method==='GET' ? url+'?'+data : url));
 
 		// 2. set headers
 		for (var header in headers) {
@@ -63,7 +64,7 @@
 		}
 
 		// 3. send it
-		req.send(method!=='GET'?_data:null);
-	}
+		req.send(method!=='GET'?data:null);
+	};
 
 }));
