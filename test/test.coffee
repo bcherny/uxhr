@@ -5,37 +5,56 @@ mocha.setup 'bdd'
 
 describe 'uxhr', ->
 
-	it 'should call options.complete()', ->
+	it 'should default the XMLHttpRequest method to GET', ->
 
-		complete = sinon.spy()
-		server = sinon.fakeServer.create()
-		
-		uxhr '#', {},
-			complete: complete
+		xhr = sinon.useFakeXMLHttpRequest()
 
-		server.requests[0].respond 200
-		expect(complete.calledOnce).to.equal(true)
+		xhr.onCreate = (xhr) ->
+			uxhr '#', {}
+			expect(xhr.method).to.equal('GET')
 
-	it 'should call options.success()', ->
+	it 'should set the XMLHttpRequest method to options.method', ->
 
-		success = sinon.spy()
-		server = sinon.fakeServer.create()
-		
-		uxhr '#', {},
-			success: success
+		xhr = sinon.useFakeXMLHttpRequest()
 
-		server.requests[0].respond 200
-		expect(success.calledOnce).to.equal(true)
+		xhr.onCreate = (xhr) ->
+			uxhr '#', {},
+				method: 'POST'
+			expect(xhr.method).to.equal('POST')
 
-	it 'should call options.error()', ->
+	describe 'callbacks', ->
 
-		error = sinon.spy()
-		server = sinon.fakeServer.create()
-		
-		uxhr '#', {},
-			error: error
+		it 'should call options.complete()', ->
 
-		server.requests[0].respond 400
-		expect(error.calledOnce).to.equal(true)
+			complete = sinon.spy()
+			server = sinon.fakeServer.create()
+			
+			uxhr '#', {},
+				complete: complete
+
+			server.requests[0].respond 200
+			expect(complete.calledOnce).to.equal(true)
+
+		it 'should call options.success()', ->
+
+			success = sinon.spy()
+			server = sinon.fakeServer.create()
+			
+			uxhr '#', {},
+				success: success
+
+			server.requests[0].respond 200
+			expect(success.calledOnce).to.equal(true)
+
+		it 'should call options.error()', ->
+
+			error = sinon.spy()
+			server = sinon.fakeServer.create()
+			
+			uxhr '#', {},
+				error: error
+
+			server.requests[0].respond 400
+			expect(error.calledOnce).to.equal(true)
 
 mocha.run()
