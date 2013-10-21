@@ -60,7 +60,7 @@
 
 		// 2. set headers
 		for (var header in headers) {
-			req.setRequestHeader(header, headers[headers]);
+			req.setRequestHeader(header, headers[header]);
 		}
 
 		// 3. send it
