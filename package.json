@@ -1,7 +1,7 @@
 {
   "name": "uxhr",
   "version": "1.0.1",
-  "description": "The teeny tiny cross-browser XHR library - just 488 bytes gzipped!",
+  "description": "The teeny tiny cross-browser XHR library - just 492 bytes gzipped!",
   "author": "Boris Cherny <boris@performancejs.com>",
   "contributors": [
     {
