@@ -6,6 +6,14 @@ expect = chai.expect;
 mocha.setup('bdd');
 
 describe('uxhr', function() {
+  it('should send the request to the passed URL', function() {
+    var url;
+    url = 'http://foobar.baz';
+    return sinon.useFakeXMLHttpRequest().onCreate = function(xhr) {
+      uxhr(url);
+      return expect(xhr.url).to.deep.equal(url);
+    };
+  });
   it('should set headers to those passed in options.headers', function() {
     var headers;
     headers = {
@@ -20,17 +28,13 @@ describe('uxhr', function() {
   });
   describe('methods', function() {
     it('should default the method to GET', function() {
-      var xhr;
-      xhr = sinon.useFakeXMLHttpRequest();
-      return xhr.onCreate = function(xhr) {
-        uxhr('#', {});
+      return sinon.useFakeXMLHttpRequest().onCreate = function(xhr) {
+        uxhr('#');
         return expect(xhr.method).to.equal('GET');
       };
     });
     return it('should set the method to options.method', function() {
-      var xhr;
-      xhr = sinon.useFakeXMLHttpRequest();
-      return xhr.onCreate = function(xhr) {
+      return sinon.useFakeXMLHttpRequest().onCreate = function(xhr) {
         uxhr('#', {}, {
           method: 'POST'
         });

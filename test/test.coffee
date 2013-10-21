@@ -5,6 +5,14 @@ mocha.setup 'bdd'
 
 describe 'uxhr', ->
 
+	it 'should send the request to the passed URL', ->
+
+		url = 'http://foobar.baz'
+
+		sinon.useFakeXMLHttpRequest().onCreate = (xhr) ->
+			uxhr url
+			expect(xhr.url).to.deep.equal(url)
+
 	it 'should set headers to those passed in options.headers', ->
 
 		headers =
@@ -20,17 +28,13 @@ describe 'uxhr', ->
 
 		it 'should default the method to GET', ->
 
-			xhr = sinon.useFakeXMLHttpRequest()
-
-			xhr.onCreate = (xhr) ->
-				uxhr '#', {}
+			sinon.useFakeXMLHttpRequest().onCreate = (xhr) ->
+				uxhr '#'
 				expect(xhr.method).to.equal('GET')
 
 		it 'should set the method to options.method', ->
 
-			xhr = sinon.useFakeXMLHttpRequest()
-
-			xhr.onCreate = (xhr) ->
+			sinon.useFakeXMLHttpRequest().onCreate = (xhr) ->
 				uxhr '#', {},
 					method: 'POST'
 				expect(xhr.method).to.equal('POST')
