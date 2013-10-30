@@ -18,6 +18,7 @@
 			error = options.error || function(){},
 			headers = options.headers || {},
 			method = options.method || 'GET',
+			sync = options.sync || false,
 			req = (function() {
 				return XMLHttpRequest ? new XMLHttpRequest() : (ActiveXObject ? new ActiveXObject('Microsoft.XMLHTTP') : 0);
 			})();
@@ -56,7 +57,7 @@
 		};
 
 		// 1. open connection
-		req.open(method, (method==='GET' ? url+'?'+data : url));
+		req.open(method, (method==='GET' ? url+'?'+data : url), sync);
 
 		// 2. set headers
 		for (var header in headers) {

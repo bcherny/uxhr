@@ -13,8 +13,8 @@ module.exports = (grunt) ->
 				comments: false
 			standard:
 				files:
-					'dist/uxhr.min.js': [
-						'src/uxhr.js'
+					'uxhr.min.js': [
+						'uxhr.js'
 					]
 
 	grunt.loadNpmTasks 'grunt-contrib-uglify'

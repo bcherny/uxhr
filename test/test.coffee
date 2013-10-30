@@ -3,6 +3,12 @@ expect = chai.expect
 
 mocha.setup 'bdd'
 
+request
+
+setup = -> request = sinon.useFakeXMLHttpRequest()
+teardown = -> request.restore()
+
+
 describe 'uxhr', ->
 
 	it 'should send the request to the passed URL', ->
@@ -33,6 +39,24 @@ describe 'uxhr', ->
 				timeout: timeout
 
 			expect(xhr.timeout).to.equal(timeout)
+
+	describe 'data', ->
+
+		it 'should encode data objects', ->
+
+			data =
+				foo: 'bar'
+				baz: 'moo'
+
+			sinon.useFakeXMLHttpRequest().onCreate = (xhr) ->
+
+				console.log 'called'
+
+				uxhr '#', data
+
+				console.log 'xhr', xhr
+
+				expect(true).to.equal(false)
 
 	describe 'methods', ->
 
