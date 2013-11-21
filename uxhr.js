@@ -48,7 +48,9 @@
 		}
 
 		// set timeout
-		req.ontimeout = +options.timeout || 0;
+		if ('ontimeout' in req) {
+			req.ontimeout = +options.timeout || 0;
+		}
 
 		// listen for XHR events
 		req.onreadystatechange = function () {
