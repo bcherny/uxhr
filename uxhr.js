@@ -20,7 +20,18 @@
 			method = options.method || 'GET',
 			sync = options.sync || false,
 			req = (function() {
-				return XMLHttpRequest ? new XMLHttpRequest() : (ActiveXObject ? new ActiveXObject('Microsoft.XMLHTTP') : 0);
+				return XMLHttpRequest ? (
+					url.indexOf('http') === 0 ? (
+						typeof XDomainRequest !== 'undefined' ?
+							new XDomainRequest()
+							: new XMLHttpRequest()
+					)
+				)
+				: (
+					ActiveXObject ?
+						new ActiveXObject('Microsoft.XMLHTTP')
+						: 0
+				);
 			})();
 
 		if (!req) {
