@@ -55,20 +55,13 @@
 		}
 
 		// listen for XHR events
-		req.onreadystatechange = function () {
-			if (req.readyState === 4) {
-
-				var response = req.responseText,
-					status = req.status;
-
-				if (status < 400) {
-					success(response);
-				} else {
-					error(response, status);
-				}
-
-				complete(response, status);
-			}
+		req.onload = function () {
+			complete(req.responseText, req.status);
+			success(req.responseText);
+		};
+		req.onerror = function () {
+			complete(req.responseText);
+			error(req.responseText, req.status);
 		};
 
 		// 1. open connection
