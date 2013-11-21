@@ -20,18 +20,20 @@
 			method = options.method || 'GET',
 			sync = options.sync || false,
 			req = (function() {
-				return XMLHttpRequest ? (
-					url.indexOf('http') === 0 ? (
-						typeof XDomainRequest !== 'undefined' ?
-							new XDomainRequest()
-							: new XMLHttpRequest()
-					)
-				)
-				: (
-					ActiveXObject ?
-						new ActiveXObject('Microsoft.XMLHTTP')
-						: 0
-				);
+
+				if (typeof 'XMLHttpRequest' !== 'undefined') {
+
+					// CORS (IE8-9)
+					if (url.indexOf('http') === 0 && typeof XDomainRequest !== 'undefined') {
+						return new XDomainRequest();
+					}
+
+					// local, CORS (other browsers)
+					return new XMLHttpRequest();
+					
+				} else if (typeof 'ActiveXObject' !== 'undefined') {
+					return new ActiveXObject('Microsoft.XMLHTTP');
+				}
 			})();
 
 		if (!req) {
