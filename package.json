@@ -1,6 +1,6 @@
 {
   "name": "uxhr",
-  "version": "1.0.3",
+  "version": "1.0.4",
   "description": "The teeny tiny cross-browser XHR library - just 493 bytes gzipped!",
   "author": "Boris Cherny <boris@performancejs.com>",
   "contributors": [
@@ -34,6 +34,7 @@
     "delete",
     "head",
     "XMLHttpRequest",
-    "XMLHTTP"
+    "XMLHTTP",
+    "XDomainRequest"
   ]
 }
