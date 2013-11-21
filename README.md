@@ -1,6 +1,6 @@
 #µXHR
 
-The teeny tiny cross-browser XHR library - just 514 bytes gzipped!
+The teeny tiny cross-browser XHR library - just 493 bytes gzipped!
 
 ##Usage
 
