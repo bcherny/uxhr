@@ -6,7 +6,7 @@
     "Boris Cherny <boris@performancejs.com>"
   ],
   "description": "The teeny tiny cross-browser XHR library - just 488 bytes gzipped!",
-  "main": "src/uxhr.js",
+  "main": "uxhr.js",
   "keywords": [
     "xhr",
     "ajax",
