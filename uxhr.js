@@ -8,10 +8,6 @@
 	}
 }(this, function () {
 
-	function defined (thing) {
-		return typeof thing !== 'undefined';
-	}
-
 	return function (url, data, options) {
 
 		data = data || '';
@@ -25,17 +21,17 @@
 			sync = options.sync || false,
 			req = (function() {
 
-				if (defined('XMLHttpRequest')) {
+				if (typeof 'XMLHttpRequest' !== 'undefined') {
 
 					// CORS (IE8-9)
-					if (url.indexOf('http') === 0 && defined(XDomainRequest)) {
+					if (url.indexOf('http') === 0 && typeof XDomainRequest !== 'undefined') {
 						return new XDomainRequest();
 					}
 
 					// local, CORS (other browsers)
 					return new XMLHttpRequest();
 					
-				} else if (defined('ActiveXObject')) {
+				} else if (typeof 'ActiveXObject' !== 'undefined') {
 					return new ActiveXObject('Microsoft.XMLHTTP');
 				}
 
