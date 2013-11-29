@@ -67,16 +67,16 @@
 			error(req.responseText, req.status);
 		};
 
-		// 1. open connection
+		// open connection
 		req.open(method, (method === 'GET' && data ? url+'?'+data : url), sync);
 
-		// 2. set headers
+		// set headers
 		for (var header in headers) {
 			req.setRequestHeader(header, headers[header]);
 		}
 
-		// 3. send it
-		req.send(method!=='GET'?data:null);
+		// send it
+		req.send(method !== 'GET' ? data : null);
 	};
 
 }));
