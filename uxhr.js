@@ -8,6 +8,8 @@
 	}
 }(this, function () {
 
+	"use strict";
+
 	return function (url, data, options) {
 
 		data = data || '';
