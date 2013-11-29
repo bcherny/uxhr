@@ -8,6 +8,10 @@
 	}
 }(this, function () {
 
+	function defined (thing) {
+		return typeof thing !== 'undefined';
+	}
+
 	return function (url, data, options) {
 
 		data = data || '';
@@ -21,19 +25,20 @@
 			sync = options.sync || false,
 			req = (function() {
 
-				if (typeof 'XMLHttpRequest' !== 'undefined') {
+				if (defined('XMLHttpRequest')) {
 
 					// CORS (IE8-9)
-					if (url.indexOf('http') === 0 && typeof XDomainRequest !== 'undefined') {
+					if (url.indexOf('http') === 0 && defined(XDomainRequest)) {
 						return new XDomainRequest();
 					}
 
 					// local, CORS (other browsers)
 					return new XMLHttpRequest();
 					
-				} else if (typeof 'ActiveXObject' !== 'undefined') {
+				} else if (defined('ActiveXObject')) {
 					return new ActiveXObject('Microsoft.XMLHTTP');
 				}
+
 			})();
 
 		if (!req) {
@@ -65,7 +70,7 @@
 		};
 
 		// 1. open connection
-		req.open(method, ((method==='GET' && data) ? url+'?'+data : url), sync);
+		req.open(method, (method === 'GET' && data ? url+'?'+data : url), sync);
 
 		// 2. set headers
 		for (var header in headers) {
