@@ -17,6 +17,14 @@ module.exports = (grunt) ->
 						'uxhr.js'
 					]
 
-	grunt.loadNpmTasks 'grunt-contrib-uglify'
+		bytesize:
+			all:
+				src: [
+					'uxhr.js'
+					'uxhr.min.js'
+				]
 
-	grunt.registerTask 'default', ['uglify']
+	grunt.loadNpmTasks 'grunt-contrib-uglify'
+	grunt.loadNpmTasks 'grunt-bytesize'
+
+	grunt.registerTask 'default', ['uglify', 'bytesize']
