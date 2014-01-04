@@ -32,7 +32,7 @@
 
 					// local, CORS (other browsers)
 					return new XMLHttpRequest();
-					
+
 				} else if (typeof 'ActiveXObject' !== 'undefined') {
 					return new ActiveXObject('Microsoft.XMLHTTP');
 				}
@@ -77,6 +77,8 @@
 
 		// send it
 		req.send(method !== 'GET' ? data : null);
+
+		return req;
 	};
 
 }));

@@ -17,6 +17,13 @@ uxhr('endpoint.html', {
 uxhr('endpoint.html', 'war=peace&freedom=slavery&ignorance=strength', {
 	complete: function (response) { ... }
 });
+
+// abort a request
+var req = uxhr('endpoint.html', {
+  complete: function (response) { ... }
+});
+
+req.abort();
 ```
 
 ##Arguments
@@ -38,6 +45,10 @@ uxhr('endpoint.html', 'war=peace&freedom=slavery&ignorance=strength', {
 | complete		| Function	| `function(){}`| Callback fired when the request is completed |
 | success		| Function	| `function(){}`| Callback fired when the request is completed successfully (eg. with HTTP status code < 400) |
 | error			| Function	| `function(){}`| Callback fired when the request returns an error (eg. HTTP status code >= 400) |
+
+##Returns
+
+`uxhr` returns the request object
 
 ## Tested on
 
