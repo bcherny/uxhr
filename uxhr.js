@@ -68,7 +68,7 @@
 		};
 
 		// open connection
-		req.open(method, (method === 'GET' && data ? url+'?'+data : url), sync);
+		req.open(method, (method === 'GET' && data ? url+'?'+data : url), !sync);
 
 		// set headers
 		for (var header in headers) {
