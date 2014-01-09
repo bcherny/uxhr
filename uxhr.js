@@ -32,7 +32,7 @@
 
 					// local, CORS (other browsers)
 					return new XMLHttpRequest();
-					
+
 				} else if (typeof 'ActiveXObject' !== 'undefined') {
 					return new ActiveXObject('Microsoft.XMLHTTP');
 				}
@@ -68,7 +68,7 @@
 		};
 
 		// open connection
-		req.open(method, (method === 'GET' && data ? url+'?'+data : url), sync);
+		req.open(method, (method === 'GET' && data ? url+'?'+data : url), !sync);
 
 		// set headers
 		for (var header in headers) {
@@ -77,6 +77,8 @@
 
 		// send it
 		req.send(method !== 'GET' ? data : null);
+
+		return req;
 	};
 
 }));
