@@ -28,11 +28,11 @@ req.abort();
 
 ##Arguments
 
-| Argument		| Type				| Required		|
-|---------------|-------------------|---------------|
-| url			| String			| Yes			|
-| data			| String | Object	| No			|
-| options		| Object			| No			|
+| Argument | Type   | Required |
+|----------|--------|----------|
+| url      | String | Yes      |
+| data     | Object | No       |
+| options  | Object | No       |
 
 ##Options
 
