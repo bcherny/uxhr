@@ -18,6 +18,9 @@
 		var complete = options.complete || function(){},
 			success = options.success || function(){},
 			error = options.error || function(){},
+			timeout = options.timeout || 0,
+			ontimeout = options.ontimeout || function(){},
+			onprogress = options.onprogress || function(){},
 			headers = options.headers || {},
 			method = options.method || 'GET',
 			sync = options.sync || false,
@@ -55,7 +58,13 @@
 
 		// set timeout
 		if ('ontimeout' in req) {
-			req.ontimeout = +options.timeout || 0;
+			req.timeout = timeout;
+			req.ontimeout = ontimeout;
+		}
+
+		// set onprogress
+		if ('onprogress' in req) {
+			req.onprogress = onprogress;
 		}
 
 		// listen for XHR events
@@ -82,8 +91,13 @@
 		}
 
 		// send it
-		req.send(method !== 'GET' ? data : null);
-
+    if (req instanceof XDomainRequest) {
+      setTimeout(function() {
+        req.send(method !== 'GET' ? data : null);
+      }, 0);
+    } else {
+      req.send(method !== 'GET' ? data : null);
+    }
 		return req;
 	};
 
