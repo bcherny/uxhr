@@ -18,6 +18,9 @@
 		var complete = options.complete || function(){},
 			success = options.success || function(){},
 			error = options.error || function(){},
+			timeout = options.timeout || 0,
+			ontimeout = options.ontimeout || function(){},
+			onprogress = options.onprogress || function(){},
 			headers = options.headers || {},
 			method = options.method || 'GET',
 			sync = options.sync || false,
@@ -44,7 +47,8 @@
 		}
 
 		// serialize data?
-		if (typeof data !== 'string') {
+		var hasFormData = (typeof(window.FormData) !== 'undefined');
+		if (typeof data !== 'string' && (hasFormData && !(data instanceof window.FormData))) {
 			var serialized = [];
 			for (var datum in data) {
 				serialized.push(datum + '=' + data[datum]);
@@ -54,7 +58,13 @@
 
 		// set timeout
 		if ('ontimeout' in req) {
-			req.ontimeout = +options.timeout || 0;
+			req.timeout = timeout;
+			req.ontimeout = ontimeout;
+		}
+
+		// set onprogress
+		if ('onprogress' in req) {
+			req.onprogress = onprogress;
 		}
 
 		// listen for XHR events
@@ -67,8 +77,13 @@
 			error(req.responseText, req.status);
 		};
 
+		// use ? or &, accourding to given url
+		if (method === 'GET' && data) {
+			url += (url.indexOf('?') >= 0) ? '&' + data : '?' + data;
+		}
+
 		// open connection
-		req.open(method, (method === 'GET' && data ? url+'?'+data : url), !sync);
+		req.open(method, url, !sync);
 
 		// set headers
 		for (var header in headers) {
@@ -76,8 +91,13 @@
 		}
 
 		// send it
-		req.send(method !== 'GET' ? data : null);
-
+    if (typeof(window.XDomainRequest)!=="undefined" && req instanceof XDomainRequest) {
+      setTimeout(function() {
+        req.send(method !== 'GET' ? data : null);
+      }, 0);
+    } else {
+      req.send(method !== 'GET' ? data : null);
+    }
 		return req;
 	};
 
