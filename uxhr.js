@@ -44,7 +44,8 @@
 		}
 
 		// serialize data?
-		if (typeof data !== 'string') {
+		var hasFormData = (typeof(window.FormData) !== 'undefined');
+		if (typeof data !== 'string' && (hasFormData && !(data instanceof window.FormData))) {
 			var serialized = [];
 			for (var datum in data) {
 				serialized.push(datum + '=' + data[datum]);
