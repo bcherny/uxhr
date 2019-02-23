@@ -60,7 +60,11 @@
 		// listen for XHR events
 		req.onload = function () {
 			complete(req.responseText, req.status);
-			success(req.responseText);
+			if (req.status < 400) {
+				success(req.responseText);
+			} else {
+				error(req.responseText, req.status);
+			}
 		};
 		req.onerror = function () {
 			complete(req.responseText);
